@@ -1,0 +1,14 @@
+id;nombre;inicio;fin;categoria
+C01;Instalación oficial;07:00;08:00;Institucional
+C02;Inteligencia artificial en la educación;08:00;09:30;Conferencia
+C03;Taller de robótica educativa;08:30;10:00;Taller
+C04;Seminario de investigación formativa;09:00;10:30;Seminario
+C05;Panel de egresados CECAR;09:30;11:00;Panel
+C06;Taller de emprendimiento;10:00;11:30;Taller
+C07;Conferencia de ciberseguridad;11:00;12:30;Conferencia
+C08;Feria de proyectos estudiantiles;11:30;13:00;Feria
+C09;Encuentro de semilleros;12:00;13:30;Encuentro
+C10;Mesa de trabajo de facultades;13:00;14:30;Reunión
+C11;Conversatorio de inclusión;09:15;10:45;Conversatorio
+C12;Clausura del evento;14:30;15:30;Institucional
+C13;Reunión de coordinadores académicos;15:00;16:30;Reunión
