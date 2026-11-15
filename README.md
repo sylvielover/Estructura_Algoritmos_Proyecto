@@ -1,7 +1,7 @@
 # Asignación óptima de salas para eventos académicos
 
-**Proyecto final — Escenario 5**  
-Curso: *Estructura de Datos y Análisis de Algoritmos*  
+**Proyecto final — Escenario 5**
+Curso: *Estructura de Datos y Análisis de Algoritmos*
 Programa de Ingeniería de Sistemas — CECAR
 
 Aplicación de escritorio en Python/Tkinter que planifica conferencias, seminarios,
@@ -48,15 +48,15 @@ La ventana abre con las 13 actividades del evento CECAR y la solución óptima d
 
 ### Atajos de teclado
 
-| Atajo | Acción |
-|---|---|
-| `Ctrl+O` | Importar conferencias desde CSV |
-| `Ctrl+S` | Exportar la asignación actual a CSV |
-| `Ctrl+R` | Generar actividades aleatorias |
-| `Ctrl+E` | Cargar el conjunto de ejemplo |
-| `←` / `→` | Paso anterior / siguiente |
-| `Espacio` | Reproducir o pausar |
-| `Supr` | Eliminar la actividad seleccionada |
+| Atajo           | Acción                              |
+| --------------- | ------------------------------------ |
+| `Ctrl+O`      | Importar conferencias desde CSV      |
+| `Ctrl+S`      | Exportar la asignación actual a CSV |
+| `Ctrl+R`      | Generar actividades aleatorias       |
+| `Ctrl+E`      | Cargar el conjunto de ejemplo        |
+| `←` / `→` | Paso anterior / siguiente            |
+| `Espacio`     | Reproducir o pausar                  |
+| `Supr`        | Eliminar la actividad seleccionada   |
 
 ## Estructura del proyecto
 
@@ -71,35 +71,21 @@ Proyecto_Salas_CECAR/
 │   ├── modelo.py               # Conferencia, algoritmo voraz, demanda y métricas
 │   ├── datos.py                # CSV, datos de ejemplo y datos aleatorios
 │   └── interfaz.py             # GUI Tkinter, línea de tiempo y comparación
-├── tests/
-│   └── test_modelo.py          # 29 pruebas unitarias
-├── scripts/
-│   ├── generar_evidencias.py   # Figuras del informe y la presentación
-│   ├── generar_capturas.py     # Capturas de la interfaz
-│   ├── smoke_interfaz.py       # Verificación automática de la GUI
-│   ├── generar_informe.py      # Genera el informe técnico DOCX
-│   └── generar_presentacion.py # Genera la presentación PPTX
-└── docs/
-    ├── figuras/                # Diagramas, Gantt, comparación y escalamiento
-    ├── capturas/               # Capturas de las tres pestañas de la GUI
-    ├── resultados_benchmark.csv
-    ├── Informe_Tecnico_Escenario5.docx
-    └── Presentacion_Escenario5.pptx
 ```
 
 ## Algoritmo
 
 ### Esquema voraz
 
-| Componente | Definición en este proyecto |
-|---|---|
-| Candidatos `C` | Conferencias con identificador, nombre, inicio, fin y categoría |
-| Solución `S` | Pares `(conferencia, sala)` sin solapamientos |
-| Seleccionar | La conferencia con menor hora de inicio (desempate: fin, id) |
-| Factible | La sala elegida está libre: `último_fin + margen ≤ nuevo_inicio` |
-| Insertar | Asignar la conferencia a la sala y actualizar su liberación |
-| Función objetivo | Minimizar el número de salas utilizadas |
-| Terminación | Todas las conferencias fueron asignadas |
+| Componente        | Definición en este proyecto                                          |
+| ----------------- | --------------------------------------------------------------------- |
+| Candidatos `C`  | Conferencias con identificador, nombre, inicio, fin y categoría      |
+| Solución `S`   | Pares `(conferencia, sala)` sin solapamientos                       |
+| Seleccionar       | La conferencia con menor hora de inicio (desempate: fin, id)          |
+| Factible          | La sala elegida está libre: `último_fin + margen ≤ nuevo_inicio` |
+| Insertar          | Asignar la conferencia a la sala y actualizar su liberación          |
+| Función objetivo | Minimizar el número de salas utilizadas                              |
+| Terminación      | Todas las conferencias fueron asignadas                               |
 
 ### Pseudocódigo
 
@@ -131,13 +117,13 @@ por inicio es esencial: con otro orden el algoritmo puede usar muchas más salas
 
 ### Complejidad
 
-| Etapa | Tiempo | Espacio |
-|---|---|---|
-| Validación de identificadores | `O(n)` | `O(n)` |
-| Ordenamiento estable | `O(n log n)` | `O(n)` |
-| Asignación con cola de prioridad | `O(n log n)` | `O(n)` |
-| Demanda máxima por barrido | `O(n log n)` | `O(n)` |
-| Bitácora didáctica (opcional) | `O(n² log n)` en el peor caso | `O(n²)` |
+| Etapa                             | Tiempo                           | Espacio    |
+| --------------------------------- | -------------------------------- | ---------- |
+| Validación de identificadores    | `O(n)`                         | `O(n)`   |
+| Ordenamiento estable              | `O(n log n)`                   | `O(n)`   |
+| Asignación con cola de prioridad | `O(n log n)`                   | `O(n)`   |
+| Demanda máxima por barrido       | `O(n log n)`                   | `O(n)`   |
+| Bitácora didáctica (opcional)   | `O(n² log n)` en el peor caso | `O(n²)` |
 
 La aplicación calcula la solución y las métricas en `O(n log n)`. La bitácora
 detallada se activa solo para la simulación paso a paso.
@@ -147,16 +133,16 @@ detallada se activa solo para la simulación paso a paso.
 Conjunto de ejemplo: **13 actividades**, **4 salas**, demanda máxima **4**
 entre **09:15 y 10:30**, solución **óptima**.
 
-| n | Tiempo promedio (ms) | Memoria pico (KiB) | Salas | Demanda |
-|---:|---:|---:|---:|---:|
-| 10 | 0.061 | 3.5 | 3 | 3 |
-| 50 | 0.248 | 9.5 | 14 | 14 |
-| 100 | 0.662 | 16.6 | 19 | 19 |
-| 250 | 1.394 | 34.8 | 46 | 46 |
-| 500 | 3.039 | 66.1 | 86 | 86 |
-| 1 000 | 5.669 | 123.8 | 168 | 168 |
-| 2 000 | 13.369 | 243.8 | 316 | 316 |
-| 4 000 | 27.257 | 563.2 | 612 | 612 |
+|     n | Tiempo promedio (ms) | Memoria pico (KiB) | Salas | Demanda |
+| ----: | -------------------: | -----------------: | ----: | ------: |
+|    10 |                0.061 |                3.5 |     3 |       3 |
+|    50 |                0.248 |                9.5 |    14 |      14 |
+|   100 |                0.662 |               16.6 |    19 |      19 |
+|   250 |                1.394 |               34.8 |    46 |      46 |
+|   500 |                3.039 |               66.1 |    86 |      86 |
+| 1 000 |                5.669 |              123.8 |   168 |     168 |
+| 2 000 |               13.369 |              243.8 |   316 |     316 |
+| 4 000 |               27.257 |              563.2 |   612 |     612 |
 
 El ajuste `t = a·n·log₂ n` obtiene `R² = 0.998` y la memoria crece de forma
 lineal (≈ 0.138 KiB por conferencia). Todos los casos fueron validados como
@@ -165,14 +151,13 @@ mínimos, máximos y número de repeticiones.
 
 ### Comparación de criterios
 
-| Orden de selección | Ejemplo (13) | Aleatorio (200) |
-|---|---:|---:|
+| Orden de selección                  |          Ejemplo (13) |        Aleatorio (200) |
+| ------------------------------------ | --------------------: | ---------------------: |
 | **Hora de inicio (escenario)** | **4 (óptimo)** | **41 (óptimo)** |
-| Orden de registro | 4 (óptimo) | 99 |
-| Duración ascendente | 5 | 53 |
-| Hora de finalización ascendente | 4 (óptimo) | 48 |
-| Hora de inicio descendente | 13 | 200 |
-
+| Orden de registro                    |           4 (óptimo) |                     99 |
+| Duración ascendente                 |                     5 |                     53 |
+| Hora de finalización ascendente     |           4 (óptimo) |                     48 |
+| Hora de inicio descendente           |                    13 |                    200 |
 
 ## Pruebas y reproducibilidad
 
@@ -246,4 +231,3 @@ automática (`C1`, `C1_2`, ...) y reporta errores con el número de línea.
 - Kleinberg, J. y Tardos, É. (2006). *Algorithm Design*. Pearson.
 - Python Software Foundation. (2026). *Python 3 Documentation*. https://docs.python.org/3/
 - Python Software Foundation. (2026). *tkinter — Python interface to Tcl/Tk*. https://docs.python.org/3/library/tkinter.html
-
